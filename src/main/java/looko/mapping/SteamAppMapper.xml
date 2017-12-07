@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="looko.dao.SteamAppMapper">
+  <resultMap id="BaseResultMap" type="looko.model.SteamApp">
+    <id column="appid" jdbcType="INTEGER" property="appid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="extra1" jdbcType="VARCHAR" property="extra1" />
+    <result column="extra2" jdbcType="VARCHAR" property="extra2" />
+    <result column="extra3" jdbcType="INTEGER" property="extra3" />
+    <result column="extra4" jdbcType="INTEGER" property="extra4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    appid, name, extra1, extra2, extra3, extra4
+  </sql>
+  <select id="selectByExample" parameterType="looko.model.SteamAppExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from steamapp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from steamapp
+    where appid = #{appid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from steamapp
+    where appid = #{appid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="looko.model.SteamAppExample">
+    delete from steamapp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="looko.model.SteamApp">
+    insert into steamapp (appid, name, extra1, 
+      extra2, extra3, extra4
+      )
+    values (#{appid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{extra1,jdbcType=VARCHAR}, 
+      #{extra2,jdbcType=VARCHAR}, #{extra3,jdbcType=INTEGER}, #{extra4,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="looko.model.SteamApp">
+    insert into steamapp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="extra1 != null">
+        extra1,
+      </if>
+      <if test="extra2 != null">
+        extra2,
+      </if>
+      <if test="extra3 != null">
+        extra3,
+      </if>
+      <if test="extra4 != null">
+        extra4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null">
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        #{extra4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="looko.model.SteamAppExample" resultType="java.lang.Long">
+    select count(*) from steamapp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update steamapp
+    <set>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra1 != null">
+        extra1 = #{record.extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra2 != null">
+        extra2 = #{record.extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra3 != null">
+        extra3 = #{record.extra3,jdbcType=INTEGER},
+      </if>
+      <if test="record.extra4 != null">
+        extra4 = #{record.extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update steamapp
+    set appid = #{record.appid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      extra1 = #{record.extra1,jdbcType=VARCHAR},
+      extra2 = #{record.extra2,jdbcType=VARCHAR},
+      extra3 = #{record.extra3,jdbcType=INTEGER},
+      extra4 = #{record.extra4,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="looko.model.SteamApp">
+    update steamapp
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null">
+        extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        extra3 = #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        extra4 = #{extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where appid = #{appid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="looko.model.SteamApp">
+    update steamapp
+    set name = #{name,jdbcType=VARCHAR},
+      extra1 = #{extra1,jdbcType=VARCHAR},
+      extra2 = #{extra2,jdbcType=VARCHAR},
+      extra3 = #{extra3,jdbcType=INTEGER},
+      extra4 = #{extra4,jdbcType=INTEGER}
+    where appid = #{appid,jdbcType=INTEGER}
+  </update>
+</mapper>

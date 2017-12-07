@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="looko.dao.OwnedGameMapper">
+  <resultMap id="BaseResultMap" type="looko.model.OwnedGame">
+    <id column="steamid" jdbcType="CHAR" property="steamid" />
+    <id column="appid" jdbcType="INTEGER" property="appid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="playtime_2weeks" jdbcType="INTEGER" property="playtime2weeks" />
+    <result column="playtime_forever" jdbcType="INTEGER" property="playtimeForever" />
+    <result column="img_icon_url" jdbcType="VARCHAR" property="imgIconUrl" />
+    <result column="img_logo_url" jdbcType="VARCHAR" property="imgLogoUrl" />
+    <result column="has_community_visible_stats" jdbcType="VARCHAR" property="hasCommunityVisibleStats" />
+    <result column="extra1" jdbcType="VARCHAR" property="extra1" />
+    <result column="extra2" jdbcType="VARCHAR" property="extra2" />
+    <result column="extra3" jdbcType="INTEGER" property="extra3" />
+    <result column="extra4" jdbcType="INTEGER" property="extra4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    steamid, appid, name, playtime_2weeks, playtime_forever, img_icon_url, img_logo_url, 
+    has_community_visible_stats, extra1, extra2, extra3, extra4
+  </sql>
+  <select id="selectByExample" parameterType="looko.model.OwnedGameExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ownedgame
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="looko.model.OwnedGameKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ownedgame
+    where steamid = #{steamid,jdbcType=CHAR}
+      and appid = #{appid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="looko.model.OwnedGameKey">
+    delete from ownedgame
+    where steamid = #{steamid,jdbcType=CHAR}
+      and appid = #{appid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="looko.model.OwnedGameExample">
+    delete from ownedgame
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="looko.model.OwnedGame">
+    insert into ownedgame (steamid, appid, name, 
+      playtime_2weeks, playtime_forever, img_icon_url, 
+      img_logo_url, has_community_visible_stats, extra1, 
+      extra2, extra3, extra4
+      )
+    values (#{steamid,jdbcType=CHAR}, #{appid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{playtime2weeks,jdbcType=INTEGER}, #{playtimeForever,jdbcType=INTEGER}, #{imgIconUrl,jdbcType=VARCHAR}, 
+      #{imgLogoUrl,jdbcType=VARCHAR}, #{hasCommunityVisibleStats,jdbcType=VARCHAR}, #{extra1,jdbcType=VARCHAR}, 
+      #{extra2,jdbcType=VARCHAR}, #{extra3,jdbcType=INTEGER}, #{extra4,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="looko.model.OwnedGame">
+    insert into ownedgame
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="steamid != null">
+        steamid,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="playtime2weeks != null">
+        playtime_2weeks,
+      </if>
+      <if test="playtimeForever != null">
+        playtime_forever,
+      </if>
+      <if test="imgIconUrl != null">
+        img_icon_url,
+      </if>
+      <if test="imgLogoUrl != null">
+        img_logo_url,
+      </if>
+      <if test="hasCommunityVisibleStats != null">
+        has_community_visible_stats,
+      </if>
+      <if test="extra1 != null">
+        extra1,
+      </if>
+      <if test="extra2 != null">
+        extra2,
+      </if>
+      <if test="extra3 != null">
+        extra3,
+      </if>
+      <if test="extra4 != null">
+        extra4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="steamid != null">
+        #{steamid,jdbcType=CHAR},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="playtime2weeks != null">
+        #{playtime2weeks,jdbcType=INTEGER},
+      </if>
+      <if test="playtimeForever != null">
+        #{playtimeForever,jdbcType=INTEGER},
+      </if>
+      <if test="imgIconUrl != null">
+        #{imgIconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgLogoUrl != null">
+        #{imgLogoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCommunityVisibleStats != null">
+        #{hasCommunityVisibleStats,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null">
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        #{extra4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="looko.model.OwnedGameExample" resultType="java.lang.Long">
+    select count(*) from ownedgame
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ownedgame
+    <set>
+      <if test="record.steamid != null">
+        steamid = #{record.steamid,jdbcType=CHAR},
+      </if>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.playtime2weeks != null">
+        playtime_2weeks = #{record.playtime2weeks,jdbcType=INTEGER},
+      </if>
+      <if test="record.playtimeForever != null">
+        playtime_forever = #{record.playtimeForever,jdbcType=INTEGER},
+      </if>
+      <if test="record.imgIconUrl != null">
+        img_icon_url = #{record.imgIconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgLogoUrl != null">
+        img_logo_url = #{record.imgLogoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasCommunityVisibleStats != null">
+        has_community_visible_stats = #{record.hasCommunityVisibleStats,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra1 != null">
+        extra1 = #{record.extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra2 != null">
+        extra2 = #{record.extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra3 != null">
+        extra3 = #{record.extra3,jdbcType=INTEGER},
+      </if>
+      <if test="record.extra4 != null">
+        extra4 = #{record.extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ownedgame
+    set steamid = #{record.steamid,jdbcType=CHAR},
+      appid = #{record.appid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      playtime_2weeks = #{record.playtime2weeks,jdbcType=INTEGER},
+      playtime_forever = #{record.playtimeForever,jdbcType=INTEGER},
+      img_icon_url = #{record.imgIconUrl,jdbcType=VARCHAR},
+      img_logo_url = #{record.imgLogoUrl,jdbcType=VARCHAR},
+      has_community_visible_stats = #{record.hasCommunityVisibleStats,jdbcType=VARCHAR},
+      extra1 = #{record.extra1,jdbcType=VARCHAR},
+      extra2 = #{record.extra2,jdbcType=VARCHAR},
+      extra3 = #{record.extra3,jdbcType=INTEGER},
+      extra4 = #{record.extra4,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="looko.model.OwnedGame">
+    update ownedgame
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="playtime2weeks != null">
+        playtime_2weeks = #{playtime2weeks,jdbcType=INTEGER},
+      </if>
+      <if test="playtimeForever != null">
+        playtime_forever = #{playtimeForever,jdbcType=INTEGER},
+      </if>
+      <if test="imgIconUrl != null">
+        img_icon_url = #{imgIconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgLogoUrl != null">
+        img_logo_url = #{imgLogoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCommunityVisibleStats != null">
+        has_community_visible_stats = #{hasCommunityVisibleStats,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null">
+        extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        extra3 = #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        extra4 = #{extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where steamid = #{steamid,jdbcType=CHAR}
+      and appid = #{appid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="looko.model.OwnedGame">
+    update ownedgame
+    set name = #{name,jdbcType=VARCHAR},
+      playtime_2weeks = #{playtime2weeks,jdbcType=INTEGER},
+      playtime_forever = #{playtimeForever,jdbcType=INTEGER},
+      img_icon_url = #{imgIconUrl,jdbcType=VARCHAR},
+      img_logo_url = #{imgLogoUrl,jdbcType=VARCHAR},
+      has_community_visible_stats = #{hasCommunityVisibleStats,jdbcType=VARCHAR},
+      extra1 = #{extra1,jdbcType=VARCHAR},
+      extra2 = #{extra2,jdbcType=VARCHAR},
+      extra3 = #{extra3,jdbcType=INTEGER},
+      extra4 = #{extra4,jdbcType=INTEGER}
+    where steamid = #{steamid,jdbcType=CHAR}
+      and appid = #{appid,jdbcType=INTEGER}
+  </update>
+</mapper>

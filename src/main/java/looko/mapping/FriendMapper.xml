@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="looko.dao.FriendMapper">
+  <resultMap id="BaseResultMap" type="looko.model.Friend">
+    <id column="steamid" jdbcType="CHAR" property="steamid" />
+    <id column="friend_steamid" jdbcType="CHAR" property="friendSteamid" />
+    <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    <result column="friend_since" jdbcType="INTEGER" property="friendSince" />
+    <result column="extra1" jdbcType="VARCHAR" property="extra1" />
+    <result column="extra2" jdbcType="VARCHAR" property="extra2" />
+    <result column="extra3" jdbcType="INTEGER" property="extra3" />
+    <result column="extra4" jdbcType="INTEGER" property="extra4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    steamid, friend_steamid, relationship, friend_since, extra1, extra2, extra3, extra4
+  </sql>
+  <select id="selectByExample" parameterType="looko.model.FriendExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from friend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="looko.model.FriendKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from friend
+    where steamid = #{steamid,jdbcType=CHAR}
+      and friend_steamid = #{friendSteamid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="looko.model.FriendKey">
+    delete from friend
+    where steamid = #{steamid,jdbcType=CHAR}
+      and friend_steamid = #{friendSteamid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="looko.model.FriendExample">
+    delete from friend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="looko.model.Friend">
+    insert into friend (steamid, friend_steamid, relationship, 
+      friend_since, extra1, extra2, 
+      extra3, extra4)
+    values (#{steamid,jdbcType=CHAR}, #{friendSteamid,jdbcType=CHAR}, #{relationship,jdbcType=VARCHAR}, 
+      #{friendSince,jdbcType=INTEGER}, #{extra1,jdbcType=VARCHAR}, #{extra2,jdbcType=VARCHAR}, 
+      #{extra3,jdbcType=INTEGER}, #{extra4,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="looko.model.Friend">
+    insert into friend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="steamid != null">
+        steamid,
+      </if>
+      <if test="friendSteamid != null">
+        friend_steamid,
+      </if>
+      <if test="relationship != null">
+        relationship,
+      </if>
+      <if test="friendSince != null">
+        friend_since,
+      </if>
+      <if test="extra1 != null">
+        extra1,
+      </if>
+      <if test="extra2 != null">
+        extra2,
+      </if>
+      <if test="extra3 != null">
+        extra3,
+      </if>
+      <if test="extra4 != null">
+        extra4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="steamid != null">
+        #{steamid,jdbcType=CHAR},
+      </if>
+      <if test="friendSteamid != null">
+        #{friendSteamid,jdbcType=CHAR},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="friendSince != null">
+        #{friendSince,jdbcType=INTEGER},
+      </if>
+      <if test="extra1 != null">
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        #{extra4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="looko.model.FriendExample" resultType="java.lang.Long">
+    select count(*) from friend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update friend
+    <set>
+      <if test="record.steamid != null">
+        steamid = #{record.steamid,jdbcType=CHAR},
+      </if>
+      <if test="record.friendSteamid != null">
+        friend_steamid = #{record.friendSteamid,jdbcType=CHAR},
+      </if>
+      <if test="record.relationship != null">
+        relationship = #{record.relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendSince != null">
+        friend_since = #{record.friendSince,jdbcType=INTEGER},
+      </if>
+      <if test="record.extra1 != null">
+        extra1 = #{record.extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra2 != null">
+        extra2 = #{record.extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra3 != null">
+        extra3 = #{record.extra3,jdbcType=INTEGER},
+      </if>
+      <if test="record.extra4 != null">
+        extra4 = #{record.extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update friend
+    set steamid = #{record.steamid,jdbcType=CHAR},
+      friend_steamid = #{record.friendSteamid,jdbcType=CHAR},
+      relationship = #{record.relationship,jdbcType=VARCHAR},
+      friend_since = #{record.friendSince,jdbcType=INTEGER},
+      extra1 = #{record.extra1,jdbcType=VARCHAR},
+      extra2 = #{record.extra2,jdbcType=VARCHAR},
+      extra3 = #{record.extra3,jdbcType=INTEGER},
+      extra4 = #{record.extra4,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="looko.model.Friend">
+    update friend
+    <set>
+      <if test="relationship != null">
+        relationship = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="friendSince != null">
+        friend_since = #{friendSince,jdbcType=INTEGER},
+      </if>
+      <if test="extra1 != null">
+        extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        extra3 = #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        extra4 = #{extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where steamid = #{steamid,jdbcType=CHAR}
+      and friend_steamid = #{friendSteamid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="looko.model.Friend">
+    update friend
+    set relationship = #{relationship,jdbcType=VARCHAR},
+      friend_since = #{friendSince,jdbcType=INTEGER},
+      extra1 = #{extra1,jdbcType=VARCHAR},
+      extra2 = #{extra2,jdbcType=VARCHAR},
+      extra3 = #{extra3,jdbcType=INTEGER},
+      extra4 = #{extra4,jdbcType=INTEGER}
+    where steamid = #{steamid,jdbcType=CHAR}
+      and friend_steamid = #{friendSteamid,jdbcType=CHAR}
+  </update>
+</mapper>

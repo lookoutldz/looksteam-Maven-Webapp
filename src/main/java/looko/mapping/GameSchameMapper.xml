@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="looko.dao.GameSchameMapper">
+  <resultMap id="BaseResultMap" type="looko.model.GameSchame">
+    <id column="appid" jdbcType="INTEGER" property="appid" />
+    <id column="achievementname" jdbcType="VARCHAR" property="achievementname" />
+    <result column="defaultvalue" jdbcType="INTEGER" property="defaultvalue" />
+    <result column="displayName" jdbcType="VARCHAR" property="displayname" />
+    <result column="hidden" jdbcType="INTEGER" property="hidden" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="icongray" jdbcType="VARCHAR" property="icongray" />
+    <result column="extra1" jdbcType="VARCHAR" property="extra1" />
+    <result column="extra2" jdbcType="VARCHAR" property="extra2" />
+    <result column="extra3" jdbcType="INTEGER" property="extra3" />
+    <result column="extra4" jdbcType="INTEGER" property="extra4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    appid, achievementname, defaultvalue, displayName, hidden, icon, icongray, extra1, 
+    extra2, extra3, extra4
+  </sql>
+  <select id="selectByExample" parameterType="looko.model.GameSchameExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gameschame
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="looko.model.GameSchameKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gameschame
+    where appid = #{appid,jdbcType=INTEGER}
+      and achievementname = #{achievementname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="looko.model.GameSchameKey">
+    delete from gameschame
+    where appid = #{appid,jdbcType=INTEGER}
+      and achievementname = #{achievementname,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="looko.model.GameSchameExample">
+    delete from gameschame
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="looko.model.GameSchame">
+    insert into gameschame (appid, achievementname, defaultvalue, 
+      displayName, hidden, icon, 
+      icongray, extra1, extra2, 
+      extra3, extra4)
+    values (#{appid,jdbcType=INTEGER}, #{achievementname,jdbcType=VARCHAR}, #{defaultvalue,jdbcType=INTEGER}, 
+      #{displayname,jdbcType=VARCHAR}, #{hidden,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{icongray,jdbcType=VARCHAR}, #{extra1,jdbcType=VARCHAR}, #{extra2,jdbcType=VARCHAR}, 
+      #{extra3,jdbcType=INTEGER}, #{extra4,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="looko.model.GameSchame">
+    insert into gameschame
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="achievementname != null">
+        achievementname,
+      </if>
+      <if test="defaultvalue != null">
+        defaultvalue,
+      </if>
+      <if test="displayname != null">
+        displayName,
+      </if>
+      <if test="hidden != null">
+        hidden,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="icongray != null">
+        icongray,
+      </if>
+      <if test="extra1 != null">
+        extra1,
+      </if>
+      <if test="extra2 != null">
+        extra2,
+      </if>
+      <if test="extra3 != null">
+        extra3,
+      </if>
+      <if test="extra4 != null">
+        extra4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        #{appid,jdbcType=INTEGER},
+      </if>
+      <if test="achievementname != null">
+        #{achievementname,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=INTEGER},
+      </if>
+      <if test="displayname != null">
+        #{displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="hidden != null">
+        #{hidden,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="icongray != null">
+        #{icongray,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null">
+        #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        #{extra4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="looko.model.GameSchameExample" resultType="java.lang.Long">
+    select count(*) from gameschame
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gameschame
+    <set>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=INTEGER},
+      </if>
+      <if test="record.achievementname != null">
+        achievementname = #{record.achievementname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultvalue = #{record.defaultvalue,jdbcType=INTEGER},
+      </if>
+      <if test="record.displayname != null">
+        displayName = #{record.displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hidden != null">
+        hidden = #{record.hidden,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icongray != null">
+        icongray = #{record.icongray,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra1 != null">
+        extra1 = #{record.extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra2 != null">
+        extra2 = #{record.extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extra3 != null">
+        extra3 = #{record.extra3,jdbcType=INTEGER},
+      </if>
+      <if test="record.extra4 != null">
+        extra4 = #{record.extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gameschame
+    set appid = #{record.appid,jdbcType=INTEGER},
+      achievementname = #{record.achievementname,jdbcType=VARCHAR},
+      defaultvalue = #{record.defaultvalue,jdbcType=INTEGER},
+      displayName = #{record.displayname,jdbcType=VARCHAR},
+      hidden = #{record.hidden,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      icongray = #{record.icongray,jdbcType=VARCHAR},
+      extra1 = #{record.extra1,jdbcType=VARCHAR},
+      extra2 = #{record.extra2,jdbcType=VARCHAR},
+      extra3 = #{record.extra3,jdbcType=INTEGER},
+      extra4 = #{record.extra4,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="looko.model.GameSchame">
+    update gameschame
+    <set>
+      <if test="defaultvalue != null">
+        defaultvalue = #{defaultvalue,jdbcType=INTEGER},
+      </if>
+      <if test="displayname != null">
+        displayName = #{displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="hidden != null">
+        hidden = #{hidden,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="icongray != null">
+        icongray = #{icongray,jdbcType=VARCHAR},
+      </if>
+      <if test="extra1 != null">
+        extra1 = #{extra1,jdbcType=VARCHAR},
+      </if>
+      <if test="extra2 != null">
+        extra2 = #{extra2,jdbcType=VARCHAR},
+      </if>
+      <if test="extra3 != null">
+        extra3 = #{extra3,jdbcType=INTEGER},
+      </if>
+      <if test="extra4 != null">
+        extra4 = #{extra4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where appid = #{appid,jdbcType=INTEGER}
+      and achievementname = #{achievementname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="looko.model.GameSchame">
+    update gameschame
+    set defaultvalue = #{defaultvalue,jdbcType=INTEGER},
+      displayName = #{displayname,jdbcType=VARCHAR},
+      hidden = #{hidden,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      icongray = #{icongray,jdbcType=VARCHAR},
+      extra1 = #{extra1,jdbcType=VARCHAR},
+      extra2 = #{extra2,jdbcType=VARCHAR},
+      extra3 = #{extra3,jdbcType=INTEGER},
+      extra4 = #{extra4,jdbcType=INTEGER}
+    where appid = #{appid,jdbcType=INTEGER}
+      and achievementname = #{achievementname,jdbcType=VARCHAR}
+  </update>
+</mapper>

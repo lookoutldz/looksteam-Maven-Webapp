@@ -1,0 +1,28 @@
+{
+	"response": {
+		"players": [
+			{
+				"steamid": "76561198367830998",
+				"communityvisibilitystate": 3,
+				"profilestate": 1,
+				"personaname": "lookoutldz",
+				"lastlogoff": 1504442472,
+				"commentpermission": 1,
+				"profileurl": "http://steamcommunity.com/id/lookoutldz/",
+				"avatar": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/28/28eb873bb45b0361cc80b0d7e319a63b59535788.jpg",
+				"avatarmedium": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/28/28eb873bb45b0361cc80b0d7e319a63b59535788_medium.jpg",
+				"avatarfull": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/28/28eb873bb45b0361cc80b0d7e319a63b59535788_full.jpg",
+				"personastate": 2,
+				"realname": "Looko",
+				"primaryclanid": "103582791459765570",
+				"timecreated": 1487653132,
+				"personastateflags": 0,
+				"gameextrainfo": "Cortex Command",
+				"gameid": "209670",
+				"loccountrycode": "CN",
+				"locstatecode": "30"
+			}
+		]
+		
+	}
+}
