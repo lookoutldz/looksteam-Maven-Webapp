@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="format-detection" content="telephone=no">
+        <meta charset="UTF-8">
+        <title>登入</title>
+            
+        <!-- CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/form.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/generics.css" rel="stylesheet"> 
+    </head>
+    <body id="skin-blur-violate" onLoad="checkCookie()">
+        <section id="login">
+            <header>
+                <h1 style="display: inline-block;">LookSteam</h1><h3 style="display: inline-block;">看蒸气</h3>
+                <p></p>
+            </header>
+        
+            <div class="clearfix"></div>   
+            <!-- Login -->
+            <form class="box tile animated active" id="box-login" action="LoginAction">
+                <h2 class="m-t-0 m-b-15">登入</h2>
+                <input type="text" class="login-control m-b-10" placeholder="17 位 数 字 的 SteamID64">
+                <div class="checkbox m-b-20">
+                    <label>
+                        <input type="checkbox">
+                        记住我
+                    </label>
+                </div>
+                <button class="btn btn-sm m-r-5">登入</button>           
+                <small>
+                    <a href="https://steamid.io/" target="_blank">如 何 获 知 我 的 SteamID64 ?</a>
+                </small>
+            </form>         
+        </section>
+        <div class="col-md-6" style="float: left; margin-left: 550px; background-color: rgba(0,0,0,0.3);">
+            <div class="templatemo-other-signin col-md-12">
+                <label class="margin-bottom-15">
+                    <h2 style="margin: 20px;">说明</h2>
+                    <ul style="margin: 10px 0; width: 100%; font-size: 18px;">
+                        <li>steamid64是17位数字的steam用户标识，具有唯一性和不可更改性。</li>
+                        <li>所有信息均来自SteamWebAPI且均为公开信息，故无需密码登入</li>
+                        <li>BUG反馈：lookoutldz@outlook.com</li>
+                        <li>作者的steamID64（测试用）：76561198367830998</li>
+                        <li>本站纯属爱好，龟速更新 ≡ω≡</li>
+                    </ul>
+                </label>
+            </div>
+
+            <div>
+                <object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/hamster/hamster.swf?up_bodyColor=f0e9cc&amp;up_feetColor=D4C898&amp;up_eyeColor=000567&amp;up_wheelSpokeColor=DEDEDE&amp;up_wheelColor=FFFFFF&amp;up_waterColor=E0EFFF&amp;up_earColor=b0c4de&amp;up_wheelOuterColor=FF4D4D&amp;up_snoutColor=F7F4E9&amp;up_bgColor=F0E4E4&amp;up_foodColor=cba920&amp;up_wheelCenterColor=E4EB2F&amp;up_tailColor=E6DEBE&amp;" width="180" height="150">
+                <param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?up_bodyColor=f0e9cc&amp;up_feetColor=D4C898&amp;up_eyeColor=000567&amp;up_wheelSpokeColor=DEDEDE&amp;up_wheelColor=FFFFFF&amp;up_waterColor=E0EFFF&amp;up_earColor=b0c4de&amp;up_wheelOuterColor=FF4D4D&amp;up_snoutColor=F7F4E9&amp;up_bgColor=F0E4E4&amp;up_foodColor=cba920&amp;up_wheelCenterColor=E4EB2E&amp;up_tailColor=E6DEBE&amp;">
+                <param name="AllowScriptAccess" value="always">
+                <param name="wmode" value="opaque">
+                </object>
+            </div>
+            <div>
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="180" height="80" id="honehoneclock" align="middle">
+                 <param name="allowScriptAccess" value="always">
+                 <param name="movie" value="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf">
+                 <param name="quality" value="high">
+                 <param name="bgcolor" value="#ffffff">
+                 <param name="wmode" value="transparent">
+                 <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.swf" quality="high" bgcolor="#ffffff" width="180" height="80" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+                 </object>
+            </div>                 
+        </div>
+        <!-- Javascript Libraries -->
+
+        <script>
+            function checkCookie()
+            {
+            steamid=getCookie('steamid')
+            if (steamid!=null && steamid!="")
+              {
+                window.location.href="<%=basePath%>/logincontroller/login.do?steamid="+steamid;
+              }
+            else 
+              {
+                alert("steamid is null")
+              }
+            }
+
+            function getCookie(c_name)
+            {
+            if (document.cookie.length>0)
+              {
+              c_start=document.cookie.indexOf(c_name + "=")
+              if (c_start!=-1)
+                { 
+                c_start=c_start + c_name.length+1 
+                c_end=document.cookie.indexOf(";",c_start)
+                if (c_end==-1) c_end=document.cookie.length
+                return unescape(document.cookie.substring(c_start,c_end))
+                } 
+              }
+            return ""
+            }
+        </script>
+
+
+
+
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script> <!-- jQuery Library -->
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
+        <!--  Form Related -->
+        <script src="js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
+        <!-- All JS functions -->
+        <script src="js/functions.js"></script>
+    </body>
+</html>
