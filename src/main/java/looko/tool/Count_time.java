@@ -1,5 +1,8 @@
 package looko.tool;
 
+/*
+ * 用于计算valve的时间流对应的确切时间
+ */
 public class Count_time {
 	
 	public static String countTimeBetween(int time_before, int time_after)

@@ -62,12 +62,17 @@ public class LoginController
 		this.playerAchService = playerAchService;
 	}
 	
+	
+	/*
+	 * 登入使用的方法
+	 */
 	@RequestMapping("/login")
 	public String login (HttpServletRequest request, HttpServletResponse response)
 	{
 		int validateCode = validator(request);
 		if(3 == validateCode)
 		{
+			//输入正确，则检查cookie，没有此cookie但勾选了记住我，则创建cookie存入用户浏览器，有的话直接登入
 			String steamid = request.getParameter("steamid");
 			String[] checkboxs = request.getParameterValues("checkbox");
 			if(checkboxs != null)
@@ -79,6 +84,8 @@ public class LoginController
 					response.addCookie(cookie);
 				}
 			
+			//从数据库中读取，存在用户信息则跳转到HomeController进一步读取信息，没有则调用api更新数据
+			//为了保证速度，用户第一次登入时，api获得的数据直接存入request使用，后台更新数据库信息
 			Player player = playerService.db_GetPlayerById(steamid);
 			if(null != player)
 			{

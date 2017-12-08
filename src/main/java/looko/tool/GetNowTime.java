@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 public class GetNowTime
 {
 	/**
-	   * 获取现在时间
+	   * 获取现在时间，存入数据库用
 	   * 
 	   * @return 返回时间类型 yyyy-MM-dd HH:mm:ss
 	   */

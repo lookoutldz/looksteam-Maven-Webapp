@@ -4,6 +4,9 @@ import looko.model.Player;
 import looko.service.PlayerServiceI;
 import looko.tool.ApplicationContextHelper;
 
+/*
+ * 用于后台更新数据库，其它类同
+ */
 public class Thread_Player extends Thread 
 {
 	private Player player;

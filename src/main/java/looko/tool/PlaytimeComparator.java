@@ -4,6 +4,9 @@ import java.util.Comparator;
 
 import looko.model.OwnedGame;
 
+/*
+ * 游戏时长即时排序
+ */
 public class PlaytimeComparator implements Comparator<OwnedGame> {
 
 	@Override

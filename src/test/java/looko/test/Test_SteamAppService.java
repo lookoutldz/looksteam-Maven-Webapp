@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import looko.api.API_SteamApp;
 import looko.model.SteamApp;
 import looko.service.SteamAppServiceI;
+import looko.thread_db.Thread_SteamApp;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring.xml","classpath:spring-mybatis.xml"})
@@ -54,5 +56,14 @@ public class Test_SteamAppService
 		long time3 = System.currentTimeMillis();
 		System.out.println((time2-time1)+"ms");
 		System.out.println((time3-time2)+"ms");
+	}
+	
+	@Test
+	public void testUpdateApps()
+	{
+//		Thread_SteamApp tapp = new Thread_SteamApp();
+//		tapp.setSteamApps(new API_SteamApp().getAsSteamApps());
+//		tapp.start();
+		sAppService.db_UpdateApps(new API_SteamApp().getAsSteamApps());
 	}
 }

@@ -16,6 +16,9 @@ import com.google.gson.JsonSyntaxException;
 
 import looko.model.Player;
 
+/*
+ * 从api获取json流，gson解析后，存入model,以供直接调用或通过service存入到数据库，同包文件类似
+ */
 public class API_Player {
 
 	public Player getAsPlayer(String steamid)

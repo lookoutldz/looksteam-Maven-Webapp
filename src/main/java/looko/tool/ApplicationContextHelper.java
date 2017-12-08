@@ -4,6 +4,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+/*用于非controller类调用service
+ * 
+ */
 public class ApplicationContextHelper implements ApplicationContextAware {
 
     private static ApplicationContext appCtx;

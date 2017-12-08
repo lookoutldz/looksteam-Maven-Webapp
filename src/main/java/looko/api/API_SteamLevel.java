@@ -12,6 +12,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
+/*
+ * 特例，实时获取json流解析并使用，不存入数据库
+ */
 public class API_SteamLevel {
 
 	public int getLevel(String steamid)
