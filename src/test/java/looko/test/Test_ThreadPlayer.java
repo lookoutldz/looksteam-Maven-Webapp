@@ -31,6 +31,13 @@ public class Test_ThreadPlayer
 		API_Player aplayer = new API_Player();
 		Thread_Player tplayer = new Thread_Player();
 		tplayer.setPlayer(aplayer.getAsPlayer("76561198367830998"));
-		tplayer.run();
+		//tplayer.run();
+		tplayer.start();
+		try {
+			tplayer.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
